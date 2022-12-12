@@ -1,7 +1,6 @@
 package manager.executor;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -9,9 +8,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringJoiner;
 
+@Slf4j
 public class ShellExecutorService {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(ShellExecutorService.class);
 
     private static final File HOME_DIRECTORY = new File(System.getProperty("user.home"));
 
@@ -19,7 +17,7 @@ public class ShellExecutorService {
         ProcessBuilder builder = new ProcessBuilder();
         builder.command("sh", "-c", command);
         builder.directory(HOME_DIRECTORY);
-        LOGGER.info("Executing command: " + command);
+        log.info("Executing command: " + command);
         return builder.start();
     }
 
@@ -43,7 +41,7 @@ public class ShellExecutorService {
             }
         }
         process.waitFor();
-        LOGGER.info("Command \"" + command + "\" output:\n" + output);
+        log.info("Command \"" + command + "\" output:\n" + output);
         return output.toString();
     }
 }

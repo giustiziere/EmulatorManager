@@ -1,10 +1,9 @@
 package manager.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import manager.dto.Device;
 import manager.dto.ResponseDTO;
 import manager.emulator.EmulatorFactory;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -12,16 +11,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+@Slf4j
 @RestController
 public class EmulatorManagementController {
-
-    private final Logger LOGGER = LoggerFactory.getLogger(EmulatorManagementController.class);
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public ResponseDTO<List<Device>> getEmulatorList(@RequestParam String platform) {
         var response = new EmulatorFactory(platform.toLowerCase()).getEmulator()
                 .getDeviceList();
-        LOGGER.info(response.toString());
+        log.info(response.toString());
         return response;
     }
 
@@ -32,7 +30,7 @@ public class EmulatorManagementController {
                                                @RequestParam(required = false) Boolean isHeadless) {
         var response = new EmulatorFactory(platform.toLowerCase()).getEmulator()
                 .createAndRunEmulator(devices, runtimes, isHeadless);
-        LOGGER.info(response.toString());
+        log.info(response.toString());
         return response;
     }
 
@@ -40,7 +38,7 @@ public class EmulatorManagementController {
     public ResponseDTO<String> deleteAllEmulators(@RequestParam String platform) {
         var response = new EmulatorFactory(platform.toLowerCase()).getEmulator()
                 .deleteAllEmulators();
-        LOGGER.info(response.toString());
+        log.info(response.toString());
         return response;
     }
 
@@ -49,7 +47,7 @@ public class EmulatorManagementController {
                                            @RequestParam String device) {
         var response = new EmulatorFactory(platform.toLowerCase()).getEmulator()
                 .addContacts(device);
-        LOGGER.info(response.toString());
+        log.info(response.toString());
         return response;
     }
 
@@ -59,7 +57,7 @@ public class EmulatorManagementController {
                                          @RequestParam String bundleId) {
         var response = new EmulatorFactory(platform.toLowerCase()).getEmulator()
                 .deleteApp(device, bundleId);
-        LOGGER.info(response.toString());
+        log.info(response.toString());
         return response;
     }
 
@@ -68,7 +66,7 @@ public class EmulatorManagementController {
                                               @RequestParam String device) {
         var response = new EmulatorFactory(platform.toLowerCase()).getEmulator()
                 .killWDASession(device);
-        LOGGER.info(response.toString());
+        log.info(response.toString());
         return response;
     }
 
@@ -78,7 +76,7 @@ public class EmulatorManagementController {
                                                       @RequestParam String filePath) {
         var response = new EmulatorFactory(platform.toLowerCase()).getEmulator()
                 .isFileExistsAtEmulator(device, filePath);
-        LOGGER.info(response.toString());
+        log.info(response.toString());
         return response;
     }
 

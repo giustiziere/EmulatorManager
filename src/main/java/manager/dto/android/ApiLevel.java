@@ -12,7 +12,8 @@ public enum ApiLevel {
     API_28("28", "9"),
     API_29("29", "10"),
     API_30("30", "11"),
-    API_31("31", "12");
+    API_31("31", "12"),
+    API_32("32", "13");
 
     private final String apiLevel;
     private final String androidVersion;
