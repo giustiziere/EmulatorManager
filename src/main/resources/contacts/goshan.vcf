@@ -1,0 +1,7 @@
+BEGIN:VCARD
+VERSION:3.0
+PRODID:-//Apple Inc.//Mac OS X 10.15.1//EN
+N:Пушкин;Вася;;;
+FN:Вася Пушкин
+TEL;type=CELL;type=VOICE;type=pref:89686485141
+END:VCARD
